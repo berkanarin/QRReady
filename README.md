@@ -4,7 +4,7 @@
 
 Tek HTML dosyasıyla çalışan, çevrimdışı kullanılabilen QR kod oluşturucu. Kurulum, derleme veya sunucu gerektirmez.
 
-**[Canlı Demo — berkanarin.com/qr](https://berkanarin.com/qr/)**
+**[Canlı Demo — berkanarin.com/qrready](https://berkanarin.com/qrready/)**
 
 ![QRReady: İçerik, Görünüm ve QR Kod alanları](docs/images/qrready.png)
 
@@ -51,7 +51,7 @@ Taslaklar, görünüm seçimleri ve PNG çözünürlüğü `sessionStorage` içi
 
 ## Yayınlama
 
-`QRReady.html` dosyasını sunucuda `qr/index.html` olarak yayınlayabilirsiniz. Uygulamanın çalışması için başka bir dosya veya arka uç servisi gerekmez.
+`QRReady.html` dosyasını sunucuda `qrready/index.html` olarak yayınlayabilirsiniz. Uygulamanın çalışması için başka bir dosya veya arka uç servisi gerekmez.
 
 ## Üçüncü Taraf Bileşenler
 
