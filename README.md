@@ -1,10 +1,12 @@
-# KareKod
+# QRReady
+
+<img src="QRReady.png" alt="QRReady Logosu" width="96">
 
 Tek HTML dosyasıyla çalışan, çevrimdışı kullanılabilen QR kod oluşturucu. Kurulum, derleme veya sunucu gerektirmez.
 
 **[Canlı Demo — berkanarin.com/qr](https://berkanarin.com/qr/)**
 
-![KareKod: İçerik, Görünüm ve QR Kod alanları](docs/images/karekod.png)
+![QRReady: İçerik, Görünüm ve QR Kod alanları](docs/images/qrready.png)
 
 ## Özellikler
 
@@ -23,15 +25,15 @@ Tek HTML dosyasıyla çalışan, çevrimdışı kullanılabilen QR kod oluşturu
 1. Depoyu indirin veya klonlayın:
 
    ```sh
-   git clone https://github.com/berkanarin/karekod.git
+   git clone https://github.com/berkanarin/QRReady.git
    ```
 
-2. `QR Creator.html` dosyasını güncel bir tarayıcıda açın.
+2. `QRReady.html` dosyasını güncel bir tarayıcıda açın.
 3. İçerik türünü seçin ve bilgilerinizi girin.
 4. Görünümü düzenleyin. Renk penceresindeki seçimleri **Uygula** ile onaylayın.
 5. **SVG İndir** veya **PNG İndir** seçeneğiyle dosyanızı kaydedin.
 
-Yalnızca `QR Creator.html` dosyasını paylaşmanız yeterlidir. İnternet bağlantısı veya ek klasör gerekmez.
+Yalnızca `QRReady.html` dosyasını paylaşmanız yeterlidir. İnternet bağlantısı veya ek klasör gerekmez.
 
 ## Okunabilirlik ve Sınırlar
 
@@ -49,7 +51,7 @@ Taslaklar, görünüm seçimleri ve PNG çözünürlüğü `sessionStorage` içi
 
 ## Yayınlama
 
-`QR Creator.html` dosyasını sunucuda `qr/index.html` olarak yayınlayabilirsiniz. Uygulamanın çalışması için başka bir dosya veya arka uç servisi gerekmez.
+`QRReady.html` dosyasını sunucuda `qr/index.html` olarak yayınlayabilirsiniz. Uygulamanın çalışması için başka bir dosya veya arka uç servisi gerekmez.
 
 ## Üçüncü Taraf Bileşenler
 
