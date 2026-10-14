@@ -650,8 +650,12 @@ button:disabled,input:disabled,select:disabled,textarea:disabled,[aria-disabled=
 @keyframes export-check-stroke{to{transform:scaleX(1)}}
 @media(prefers-reduced-motion:reduce){.export-sheen{display:none}.download .t-icon-swap[data-state=b] .check-short,.download .t-icon-swap[data-state=b] .check-long{animation:none;transform:scaleX(1)}}
 #byte-count[data-over-limit=true]{color:var(--danger)}
-.brand-mark{width:3rem;height:3rem;background:transparent;border-radius:0}
-.brand-mark img{display:block;width:100%;height:100%;object-fit:contain}
+/* Optical alignment compensates for the original logo's transparent canvas. */
+.brand{gap:.5rem;align-items:center;font-size:1.125rem}
+.brand-mark{position:relative;flex:0 0 2.5rem;width:2.5rem;height:2rem;overflow:hidden;background:transparent;border-radius:0}
+.brand-mark img{position:absolute;display:block;width:117%;height:auto;max-width:none;left:50%;top:50%;transform:translate(-52%,-51%)}
+.brand-copy{gap:0;line-height:1.25}
+.brand-signature{font-size:.625rem;line-height:1.25;letter-spacing:.02em}
 </style>
 </head>
 <body>
