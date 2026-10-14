@@ -58,6 +58,7 @@ Taslaklar, görünüm seçimleri ve PNG çözünürlüğü `sessionStorage` içi
 
 - [Project Nayuki QR Code Generator](https://www.nayuki.io/page/qr-code-generator-library) — MIT.
 - [Geist](https://github.com/vercel/geist-font) — SIL Open Font License 1.1.
+- [Font Awesome Free](https://fontawesome.com/license/free) — bazı footer ikonları, CC BY 4.0.
 - [Bibata Modern Ice](https://github.com/ful1e5/Bibata_Cursor) — GPL-3.0. İmleçler tarayıcı kullanımı için 24 piksele küçültülmüştür; desteklenmeyen ortamlarda sistem imleçleri kullanılır.
 
 Bu bileşenlerin lisans metinleri ve kaynak bilgileri HTML dosyasında korunur.
