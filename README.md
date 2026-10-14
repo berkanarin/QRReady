@@ -17,6 +17,7 @@ Tek HTML dosyasıyla çalışan, çevrimdışı kullanılabilen QR kod oluşturu
 - SVG ve 512, 1024, 2048 veya 4096 piksel PNG indirme.
 - Kontrast ve yoğunluk uyarıları.
 - Aynı sekmede sayfa yenilendiğinde içerik ve seçimleri oturum boyunca koruma.
+- Web sürümünde EN / TR dil seçimi.
 - Masaüstü ve mobil kullanım; hareket azaltma tercihine uygun animasyonlar.
 - Yazı tipleri, imleçler ve QR kod üreticisi dahil gömülü çalışma dosyaları.
 

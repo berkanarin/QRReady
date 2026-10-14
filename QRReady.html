@@ -657,6 +657,16 @@ button:disabled,input:disabled,select:disabled,textarea:disabled,[aria-disabled=
 .brand-mark img{position:absolute;display:block;width:117%;height:auto;max-width:none;left:50%;top:50%;transform:translate(-52%,-51%)}
 .brand-copy{gap:0;line-height:1.25}
 .brand-signature{font-size:.625rem;line-height:1.25;letter-spacing:.02em}
+
+.has-web-language .workspace{position:relative;padding-top:2rem}
+.web-language{position:absolute;z-index:2;right:.5rem;top:.25rem;display:flex;align-items:center;gap:.25rem;color:var(--secondary);font-size:.75rem;line-height:1.25}
+.web-language[hidden]{display:none}
+.web-language button{border:0;background:transparent;padding:.25rem;color:var(--secondary);font-size:inherit;line-height:inherit;font-weight:400;opacity:.65;transition:opacity 180ms ease}
+.web-language button[aria-pressed=true]{color:var(--ink);font-weight:700;opacity:1}
+.web-language button:hover{opacity:1}
+.web-language button:active:not(:disabled){transform:none}
+@media(max-width:767px){body:not([data-view=preview]) .web-language{display:none}.has-web-language body:not([data-view=preview]) .workspace{padding-top:0}}
+@media(prefers-reduced-motion:reduce){.web-language button{transition:none}}
 </style>
 </head>
 <body>
@@ -679,7 +689,7 @@ button:disabled,input:disabled,select:disabled,textarea:disabled,[aria-disabled=
 
 <p id="notice" class="notice" hidden aria-hidden="true"></p>
 </div></section>
-<aside class="preview-card" aria-label="Önizleme ve indirme"><div class="preview-head"><h2>QR Kod</h2><span class="live">Canlı Önizleme</span></div><div class="qr-stage" id="preview" role="img" aria-label="QR kod önizlemesi"></div><div class="preview-info"><span id="kind-label">Bağlantı</span><span id="matrix-info">İçerik bekleniyor</span></div>
+<aside class="preview-card" aria-label="Önizleme ve indirme"><nav class="web-language" hidden aria-label="Dil Seçimi"><button type="button" data-language="en" lang="en" aria-pressed="false">EN</button><span aria-hidden="true">/</span><button type="button" data-language="tr" lang="tr" aria-pressed="true">TR</button></nav><div class="preview-head"><h2>QR Kod</h2><span class="live">Canlı Önizleme</span></div><div class="qr-stage" id="preview" role="img" aria-label="QR kod önizlemesi"></div><div class="preview-info"><span id="kind-label">Bağlantı</span><span id="matrix-info">İçerik bekleniyor</span></div>
 <div class="export"><label for="size">PNG Çözünürlüğü</label><select id="size"><option value="512">512 × 512 px</option><option value="1024" selected>1024 × 1024 px</option><option value="2048">2048 × 2048 px</option><option value="4096">4096 × 4096 px</option></select><div class="downloads"><button type="button" id="download-svg" class="download secondary" disabled>SVG İndir</button><button type="button" id="download-png" class="download primary" disabled>PNG İndir</button></div></div></aside>
 </div>
 </main>
@@ -2336,6 +2346,75 @@ var qrcodegen;
 // QR encoding: Project Nayuki, MIT. All runtime assets are embedded in this file.
 const $ = id => document.getElementById(id);
 document.querySelector('link[rel=icon]').href=document.querySelector('.brand-mark img').src;
+
+const englishUi={
+ 'İçerik':'Content','Görünüm':'Appearance','Önizle / İndir':'Preview / Download',
+ 'Bağlantı':'Link','Metin':'Text','Kartvizit':'Contact','E-Posta':'Email',
+ 'Web Adresi':'Web Address','Metniniz':'Your Text','Telefon Numarası (Ülke Koduyla)':'Phone Number (With Country Code)',
+ 'E-Posta Adresi':'Email Address','Konu':'Subject','Mesaj':'Message','Ad Soyad *':'Full Name *','Telefon':'Phone','Kurum':'Company','Unvan':'Job Title',
+ 'Bir URL girin':'Enter a URL','Metin girin':'Enter your text','Ülke koduyla numara girin':'Enter a number with country code',
+ 'Email adresi girin':'Enter an email address','Konu girin':'Enter a subject','Mesaj girin':'Enter a message',
+ 'Ad soyad girin':'Enter a full name','Telefon numarası girin':'Enter a phone number','Kurum adı girin':'Enter a company name','Unvan girin':'Enter a job title',
+ 'İç Desen':'Pattern','Köşe Çerçevesi':'Corner Frame','Köşe Merkezi':'Corner Center',
+ 'Kare':'Square','Yumuşak':'Rounded','Nokta':'Dots','Daire':'Circle',
+ 'Renkler':'Colors','QR Rengi':'QR Color','Zemin Rengi':'Background','Hazır Renkler':'Preset Colors','Şeffaf':'Transparent',
+ 'Vazgeç':'Cancel','Uygula':'Apply','Kapat':'Close','HEX kodu girin':'Enter a HEX code',
+ 'QR Kod':'QR Code','Canlı Önizleme':'Live Preview','PNG Çözünürlüğü':'PNG Resolution','SVG İndir':'Download SVG','PNG İndir':'Download PNG',
+ 'İçeriğinizi girin.':'Enter your content.','QR kodunuz burada görünsün.':'Your QR code will appear here.',
+ 'İçerik bekleniyor':'Waiting for content','İçerik Çok Uzun':'Content Too Long','Metni kısaltın.':'Shorten your text.','İçeriği kısaltın.':'Shorten your content.',
+ 'Renkler arasındaki kontrastı artırın.':'Increase the contrast between the colors.','Renkleri düzenleyin':'Adjust the colors',
+ 'QR yoğun. İçeriği kısaltın; kullanmadan önce telefonunuzla kontrol edin.':'This QR code is dense. Shorten the content and scan it with your phone before sharing.',
+ 'QR yoğun. İçeriği kısaltın veya İç Desen için Kare seçin.':'This QR code is dense. Shorten the content or choose Square under Pattern.',
+ 'Kontrast düşük.\nRengi uygulayabilirsiniz; QR oluşturmak için diğer rengi de değiştirin.':'Low contrast.\nYou can apply this color; change the other color as well to generate your QR code.',
+ 'Şeffaf zeminde okunabilirlik, yerleştirdiğiniz yüzeye bağlıdır.':'Readability on a transparent background depends on the surface you place it on.',
+ 'Geçerli bir HEX renk kodu girin: #274A9B.':'Enter a valid HEX color code, such as #274A9B.',
+ 'Saf siyah yerine #18181B gibi bir renk seçin.':'Choose a color such as #18181B instead of pure black.',
+ 'Geçerli bir http/https bağlantısı girin.':'Enter a valid http/https URL.',
+ 'Geçerli bir e-posta adresi girin.':'Enter a valid email address.','Geçerli bir telefon numarası girin.':'Enter a valid phone number.',
+ 'Telefon numarasını ülke koduyla girin.':'Enter the phone number with its country code.','Kartvizit için ad soyad girin.':'Enter a full name for the contact.',
+ 'QR kod oluşturmak için bir bağlantı girin.':'Enter a URL to generate a QR code.','QR kod oluşturmak için metin girin.':'Enter text to generate a QR code.',
+ 'QR ve zemin kontrastı en az 4,5:1 olmalı. Daha koyu bir QR rengi seçin.':'QR and background colors need at least 4.5:1 contrast. Choose a darker QR color.',
+ 'Ters renkli QR kod: bazı kameralar okuyamayabilir. Telefonunuzla kontrol edin.':'Inverted QR colors: some cameras may not read this code. Check it with your phone.',
+ 'Tarayıcı PNG oluşturmayı desteklemiyor.':'Your browser does not support PNG generation.',
+ 'PNG oluşturulamadı. Tekrar deneyin.':'Could not generate the PNG. Try again.','PNG indirilemedi. Tekrar deneyin.':'Could not download the PNG. Try again.',
+ 'UTF-8 bayt sayısı; Türkçe karakterler birden fazla bayt kullanabilir.':'UTF-8 byte count; some characters use more than one byte.',
+ 'Dil Seçimi':'Language Selection','Çalışma alanı':'Workspace','İçerik ayarları':'Content Settings','Görünüm ayarları':'Appearance Settings',
+ 'İçerik türü':'Content Type','QR deseni':'QR Pattern','Köşe çerçevesi':'Corner Frame','Köşe merkezi':'Corner Center',
+ 'Önizleme ve indirme':'Preview and Download','QR kod önizlemesi':'QR Code Preview','İçerik boyutu':'Content Size',
+ 'Varsayılan renklere dön':'Reset Colors','Bildirimi kapat':'Dismiss Notification'
+};
+for(const [tr,en] of [['QR Rengi','QR Color'],['Zemin Rengi','Background Color']]){
+ for(const [suffix,translation] of [[' seçimi',' Selection'],[' presetleri',' Presets'],[' renk paleti',' Palette'],[' renk tonu',' Hue'],[' HEX',' HEX']])englishUi[tr+suffix]=en+translation;
+}
+// Resolve the language before the first frame, including direct links from the homepage.
+let uiLanguage='tr';
+try{const requested=new URLSearchParams(location.search).get('lang'),saved=sessionStorage.getItem('qrready.language');uiLanguage=['tr','en'].includes(requested)?requested:saved==='en'?'en':'tr';}catch{}
+document.documentElement.lang=uiLanguage;
+document.documentElement.classList.toggle('has-web-language',['http:','https:'].includes(location.protocol));
+const uiSources=new WeakMap();
+function uiText(source){
+ if(uiLanguage!=='en')return source;
+ const clean=source.trim();let translated=englishUi[clean];
+ if(!translated&&/^(Metin|İçerik) çok uzun\. \d+ bayt sınırına sığacak şekilde kısaltın\.$/.test(clean))translated=clean.replace(/^(Metin|İçerik) çok uzun\. (\d+) bayt sınırına sığacak şekilde kısaltın\.$/,(_,type,limit)=>(type==='Metin'?'Text':'Content')+' is too long. Shorten it to fit within '+limit+' bytes.');
+ if(!translated)translated=clean.replace(/ modül$/,' modules').replace(/ UTF-8 bayt$/,' UTF-8 bytes');
+ return source.replace(clean,translated);
+}
+function localizedValue(node,key,current){
+ let values=uiSources.get(node);if(!values){values={};uiSources.set(node,values);}
+ let state=values[key];if(!state||state.last!==current)state={source:current,last:current};
+ const next=uiText(state.source);state.last=next;values[key]=state;return next;
+}
+function localizeUi(root=document.body){
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;
+ while(node=walker.nextNode()){
+  if(!node.nodeValue.trim()||node.parentElement?.closest('script,style,textarea,svg,pre,code'))continue;
+  const next=localizedValue(node,'text',node.nodeValue);if(next!==node.nodeValue)node.nodeValue=next;
+ }
+ for(const el of root.querySelectorAll('[aria-label],[placeholder],[title]'))for(const key of ['aria-label','placeholder','title']){
+  if(!el.hasAttribute(key))continue;const current=el.getAttribute(key),next=localizedValue(el,key,current);if(next!==current)el.setAttribute(key,next);
+ }
+}
+
 const icons={url:'<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2"/>',text:'<path d="M4 5h16M12 5v15M8 20h8"/>',vcard:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5 17c0-4 8-4 8 0M16 9h2M16 13h2"/>',email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>',whatsapp:'<path d="M20.5 11.5a9 9 0 0 1-13.3 7.9L3 21l1.5-4.3a9 9 0 1 1 16-5.2Z"/><path d="m8 7 2 3-1 1a10 10 0 0 0 4 4l1-1 3 1c0 3-3 3-6 1s-6-6-4-8l1-1Z"/>'};
 const icon = path => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+path+'</svg>';
 const kinds={url:'Bağlantı',text:'Metin',vcard:'Kartvizit',email:'E-Posta',whatsapp:'WhatsApp'};
@@ -2409,7 +2488,7 @@ function updateColorWarnings(){
  const issue=invalid?'Geçerli bir HEX renk kodu girin: #274A9B.':colorDesignIssue();
  setNotice('color',issue||(paperTransparent?'Şeffaf zeminde okunabilirlik, yerleştirdiğiniz yüzeye bağlıdır.':''),invalid?'error':issue?'warning':'info');
 }
-function syncColorPickers(){for(const [id,state] of colorPopups){const hex=$(id).value.toUpperCase(),color=hsv(hex);state.popup.querySelector('.color-apply').disabled=$(id+'-hex').getAttribute('aria-invalid')==='true'||hex==='#000000';if(color.s>0)state.hue=color.h;$(id+'-hue').value=state.hue;const trigger=$(id+'-trigger');trigger.querySelector('.color-dot circle').setAttribute('fill',id==='paper'&&paperTransparent?'url(#paper-checker)':hex);state.popup.querySelector('.hex-color-button circle').setAttribute('fill',id==='paper'&&paperTransparent?'url(#paper-hex-checker)':hex);trigger.querySelector('.color-value').textContent=id==='paper'&&paperTransparent?'Şeffaf':hex;if(id==='paper'){$('paper-hex').disabled=paperTransparent;if(paperTransparent)$('paper-hex').value='Şeffaf';}
+function syncColorPickers(){for(const [id,state] of colorPopups){const hex=$(id).value.toUpperCase(),color=hsv(hex);state.popup.querySelector('.color-apply').disabled=$(id+'-hex').getAttribute('aria-invalid')==='true'||hex==='#000000';if(color.s>0)state.hue=color.h;$(id+'-hue').value=state.hue;const trigger=$(id+'-trigger');trigger.querySelector('.color-dot circle').setAttribute('fill',id==='paper'&&paperTransparent?'url(#paper-checker)':hex);state.popup.querySelector('.hex-color-button circle').setAttribute('fill',id==='paper'&&paperTransparent?'url(#paper-hex-checker)':hex);trigger.querySelector('.color-value').textContent=id==='paper'&&paperTransparent?'Şeffaf':hex;if(id==='paper'){$('paper-hex').disabled=paperTransparent;if(paperTransparent)$('paper-hex').value=uiText('Şeffaf');}
  const canvas=$(id+'-palette'),ctx=canvas.getContext('2d');ctx.fillStyle='hsl('+state.hue+' 100% 50%)';ctx.fillRect(0,0,512,288);let gradient=ctx.createLinearGradient(0,0,512,0);gradient.addColorStop(0,'#FFFFFF');gradient.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=gradient;ctx.fillRect(0,0,512,288);gradient=ctx.createLinearGradient(0,0,0,288);gradient.addColorStop(0,'rgba(24,24,27,0)');gradient.addColorStop(1,'rgb(1,1,1)');ctx.fillStyle=gradient;ctx.fillRect(0,0,512,288);
  const cursor=state.popup.querySelector('.palette-cursor');cursor.style.left=color.s*100+'%';cursor.style.top=(1-color.v)*100+'%';
 }updateColorWarnings();}
@@ -2635,7 +2714,7 @@ function measureWorkspace(){
  const fields=copy.querySelector('.form-grid');
  document.querySelector('main').append(copy);
  let tallest=0;
- for(const selected of Object.keys(kinds)){renderFields(selected,fields);tallest=Math.max(tallest,copy.offsetHeight);}
+ for(const selected of Object.keys(kinds)){renderFields(selected,fields);localizeUi(copy);tallest=Math.max(tallest,copy.offsetHeight);}
  copy.remove();return tallest;
 }
 function fitWorkspace(){
@@ -2686,6 +2765,29 @@ for(const group of slidingGroups){
 document.fonts.ready.then(()=>slidingGroups.forEach(group=>syncSlidingTab(group)));
 
 drawFields();refresh();fitWorkspace();
+
+// Translate newly rendered UI while keeping user-entered values and QR data intact.
+const webLanguage=document.querySelector('.web-language');
+document.querySelector('.workspace').append(webLanguage);
+const languageObserver=new MutationObserver(()=>translateUi());
+const observeLanguage=()=>languageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['aria-label','placeholder','title']});
+function translateUi(){
+ languageObserver.disconnect();localizeUi();
+ webLanguage.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.language===uiLanguage)));
+ if(paperTransparent)$('paper-hex').value=uiText('Şeffaf');
+ observeLanguage();
+}
+webLanguage.hidden=!['http:','https:'].includes(location.protocol);
+webLanguage.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+ const next=button.dataset.language;if(next===uiLanguage)return;
+ uiLanguage=next;document.documentElement.lang=next;
+ try{sessionStorage.setItem('qrready.language',next);}catch{}
+ if(['http:','https:'].includes(location.protocol)){const url=new URL(location.href);url.searchParams.set('lang',next);history.replaceState(null,'',url);}
+ translateUi();fitKey='';fitTextInputs();fitWorkspace();
+ requestAnimationFrame(()=>slidingGroups.forEach(group=>syncSlidingTab(group)));
+}));
+translateUi();fitKey='';fitWorkspace();
+
 // One entrance per document load; view switches never replay it.
 requestAnimationFrame(()=>{
  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
